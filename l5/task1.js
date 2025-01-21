@@ -1,4 +1,4 @@
-const prompt = require('prompt-sync')();
+const readline = require('readline');
 
 const rl = readline.createInterface({
     input: process.stdin,
@@ -10,7 +10,7 @@ function stringFrom(...args) {
 }
 
 function colectStrings(){
-    const strings = {};
+    const strings = [];
 
     function askForInput(){
         rl.question("Введите строку или стоп:", (input) =>{
