@@ -32,7 +32,6 @@ function drawCards() {
             const cardValue = deck.pop();
             const card = document.createElement('div');
             card.className = 'card';
-            card.style.backgroundImage = `url(https://deckofcardsapi.com/static/img/${cardValue}.png)`;
             card.style.top = `${30 * j}px`;
             pile.appendChild(card);
             gamePiles[i].push(cardValue);
