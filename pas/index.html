@@ -3,23 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
     <title>Пасьянс Косынка</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h1>Пасьянс Косынка</h1>
-    <div id="game">
-        <div id="stock" class="pile">Запас</div>
-        <div id="waste" class="pile">Сброс</div>
-        <div id="tableau">
-            <div class="pile"></div>
-            <div class="pile"></div>
-            <div class="pile"></div>
-            <div class="pile"></div>
-            <div class="pile"></div>
-            <div class="pile"></div>
-            <div class="pile"></div>
-        </div>
+    <div id="stock" class="deck"></div>
+    <div id="waste" class="deck"></div>
+    <div id="foundations">
+        <div class="foundation"></div>
+        <div class="foundation"></div>
+        <div class="foundation"></div>
+        <div class="foundation"></div>
+    </div>
+    <div id="tableau">
+        <div class="tableau-column"></div>
+        <div class="tableau-column"></div>
+        <div class="tableau-column"></div>
+        <div class="tableau-column"></div>
+        <div class="tableau-column"></div>
+        <div class="tableau-column"></div>
+        <div class="tableau-column"></div>
     </div>
     <script src="script.js"></script>
 </body>

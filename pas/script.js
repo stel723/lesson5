@@ -1,60 +1,60 @@
-const suits = ['♠', '♣', '♥', '♦'];
-const ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
+const suits = ['♠', '♥', '♦', '♣'];
+const ranks = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
 let deck = [];
-let tableau = [];
+let tableau = [[], [], [], [], [], [], []];
+let foundations = [[], [], [], []];
 
-// Создание колоды
+// Создаем колоду карт
 function createDeck() {
     for (let suit of suits) {
         for (let rank of ranks) {
             deck.push(rank + suit);
         }
     }
-    shuffle(deck);
+    shuffleDeck();
 }
 
-// Перемешивание колоды
-function shuffle(array) {
-    for (let i = array.length - 1; i > 0; i--) {
+// Перемешиваем колоду
+function shuffleDeck() {
+    for (let i = deck.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
+        [deck[i], deck[j]] = [deck[j], deck[i]];
     }
 }
 
-// Начало игры
-function startGame() {
-    createDeck();
+// Раздаем карты
+function dealCards() {
     for (let i = 0; i < 7; i++) {
-        tableau[i] = deck.splice(0, i + 1);
-        displayTableau(i);
+        for (let j = 0; j <= i; j++) {
+            tableau[i].push(deck.pop());
+        }
     }
-    document.getElementById('stock').innerText = 'Осталось: ' + deck.length + ' карт';
 }
 
-// Отображение столов (pile)
-function displayTableau(index) {
-    const pile = document.querySelectorAll('.pile')[index];
-    pile.innerHTML = ''; // Очищаем предыдущие карты
-    tableau[index].forEach((card, idx) => {
-        const cardElement = document.createElement('div');
-        cardElement.className = 'card' + (idx === tableau[index].length - 1 ? '' : ' hidden');
-        cardElement.innerText = card; // Текстовое представление карты (можно заменить на изображение)
-        pile.appendChild(cardElement);
+// Рисуем колоду карт
+function drawCards() {
+    const stockDiv = document.getElementById('stock');
+    stockDiv.textContent = '🔄'; // Значок для колоды
+    stockDiv.addEventListener('click', () => {
+        if (deck.length > 0) {
+            const card = deck.pop();
+            const wasteDiv = document.getElementById('waste');
+            wasteDiv.textContent = card; // Показываем верхнюю карту
+        }
+    });
+
+    tableau.forEach((column, index) => {
+        const tableauDiv = document.querySelectorAll('.tableau-column')[index];
+        column.forEach((card, i) => {
+            const cardDiv = document.createElement('div');
+            cardDiv.className = 'card';
+            cardDiv.textContent = card;
+            tableauDiv.appendChild(cardDiv);
+        });
     });
 }
 
-// Перетаскивание карты
-function drawCard() {
-    if (deck.length > 0) {
-        const card = deck.pop();
-        const waste = document.getElementById('waste');
-        waste.innerText = 'Сброс: ' + card; // Можно заменить на логику отображения
-        waste.classList.remove('hidden');
-        document.getElementById('stock').innerText = 'Осталось: ' + deck.length + ' карт';
-    } else {
-        alert("Нет карт в запасе!");
-    }
-}
-
-// Запуск игры
-startGame();
+// Инициализация игры
+createDeck();
+dealCards();
+drawCards();
