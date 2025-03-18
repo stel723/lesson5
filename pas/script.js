@@ -1,10 +1,12 @@
 const deckElement = document.getElementById('deck');
 const tableauElement = document.getElementById('tableau');
 const foundationsElement = document.getElementById('foundations');
+const scoreElement = document.getElementById('score');
 
 const suits = ['hearts', 'diamonds', 'clubs', 'spades'];
 const values = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
 let deck = [];
+let score = 0;
 
 // Создание колоды
 function createDeck() {
@@ -30,15 +32,24 @@ function displayDeck() {
     if (card) {
         const cardElement = document.createElement('div');
         cardElement.className = 'card';
-        cardElement.innerHTML = `${card.value} of ${card.suit}`;
+        cardElement.innerHTML = `<img src="images/${card.value}_of_${card.suit}.png" alt="${card.value} of ${card.suit}">`;
         tableauElement.appendChild(cardElement);
+        updateScore(1); // Увеличиваем счет на 1 за каждую раздачу карты
     }
+}
+
+// Обновление счета
+function updateScore(points) {
+    score += points;
+    scoreElement.textContent = score;
 }
 
 // Инициализация игры
 function initGame() {
     createDeck();
-    displayDeck();
+    for (let i = 0; i < 7; i++) { // Раздаем 7 карт
+        displayDeck();
+    }
 }
 
 // Запуск игры
