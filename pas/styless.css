@@ -17,20 +17,15 @@ body {
     border: 1px solid #000;
     margin: 0 auto;
     cursor: pointer;
+    position: relative;
+    line-height: 140px;
+    font-size: 24px;
 }
 
 .tableau {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     margin-top: 20px;
-}
-
-.foundation {
-    width: 100px;
-    height: 140px;
-    background-color: #fff;
-    border: 1px solid #000;
-    margin: 0 10px;
 }
 
 .card {
@@ -41,9 +36,6 @@ body {
     margin: 5px;
     display: inline-block;
     position: relative;
-}
-
-.card img {
-    width: 100%;
-    height: auto;
+    line-height: 140px;
+    font-size: 24px;
 }
