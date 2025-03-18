@@ -1,13 +1,13 @@
 body {
     font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: #e0e0e0;
+    background-color: #2E7D32;
+    color: white;
+    text-align: center;
 }
 
-h1 {
-    margin: 20px;
+.game-container {
+    margin: 20px auto;
+    width: 800px;
 }
 
 .deck {
@@ -15,32 +15,35 @@ h1 {
     height: 140px;
     background-color: #fff;
     border: 1px solid #000;
-    position: relative;
-    margin: 10px;
-    display: inline-block;
+    margin: 0 auto;
+    cursor: pointer;
+}
+
+.tableau {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
 }
 
 .foundation {
     width: 100px;
     height: 140px;
-    background-color: #ffd700;
+    background-color: #fff;
     border: 1px solid #000;
-    display: inline-block;
-    margin-right: 10px;
+    margin: 0 10px;
 }
 
-.tableau-column {
-    display: flex;
-    flex-direction: column;
-    margin: 10px;
-}
 .card {
     width: 100px;
     height: 140px;
-    background-color: #f4f4f4;
+    background-color: #fff;
     border: 1px solid #000;
-    line-height: 140px;
-    text-align: center;
-    margin-bottom: 5px;
+    margin: 5px;
+    display: inline-block;
     position: relative;
+}
+
+.card img {
+    width: 100%;
+    height: auto;
 }
