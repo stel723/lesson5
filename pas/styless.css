@@ -26,16 +26,22 @@ body {
     display: flex;
     justify-content: center;
     margin-top: 20px;
+    flex-wrap: wrap;
 }
 
 .card {
     width: 100px;
     height: 140px;
-    background-color: #637aad;
-    border: 1px solid #000000;
+    background-color: #fff;
+    border: 1px solid #000;
     margin: 5px;
     display: inline-block;
     position: relative;
     line-height: 140px;
     font-size: 24px;
+    cursor: pointer;
+}
+
+.card.dragging {
+    opacity: 0.5;
 }
