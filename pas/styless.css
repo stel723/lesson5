@@ -31,8 +31,8 @@ body {
 .card {
     width: 100px;
     height: 140px;
-    background-color: #fff;
-    border: 1px solid #a76565;
+    background-color: #ad6363;
+    border: 1px solid #000000;
     margin: 5px;
     display: inline-block;
     position: relative;
