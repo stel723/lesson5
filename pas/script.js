@@ -9,6 +9,7 @@ let deck = [];
 let score = 0;
 let timer = 0;
 let timerInterval;
+let draggedCard = null;
 
 // Создание колоды
 function createDeck() {
@@ -35,11 +36,41 @@ function drawCard() {
         return;
     }
     const card = deck.pop();
+    const cardElement = createCardElement(card);
+    tableauElement.appendChild(cardElement);
+    updateScore(1); // Увеличиваем счет на 1 за каждую раздачу карты
+}
+
+// Создание элемента карты
+function createCardElement(card) {
     const cardElement = document.createElement('div');
     cardElement.className = 'card';
     cardElement.textContent = `${card.value} ${card.suit}`;
-    tableauElement.appendChild(cardElement);
-    updateScore(1); // Увеличиваем счет на 1 за каждую раздачу карты
+    cardElement.draggable = true;
+
+    cardElement.addEventListener('dragstart', (e) => {
+        draggedCard = cardElement;
+        setTimeout(() => {
+            cardElement.classList.add('dragging');
+        }, 0);
+    });
+
+    cardElement.addEventListener('dragend', () => {
+        draggedCard = null;
+        cardElement.classList.remove('dragging');
+    });
+
+    tableauElement.addEventListener('dragover', (e) => {
+        e.preventDefault();
+    });
+
+    tableauElement.addEventListener('drop', (e) => {
+        if (draggedCard) {
+            tableauElement.appendChild(draggedCard);
+        }
+    });
+
+    return cardElement;
 }
 
 // Обновление счета
