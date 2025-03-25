@@ -1,47 +1,37 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #2E7D32;
-    color: rgb(253, 253, 253);
+    background-color: #2e7d32;
+    color: white;
     text-align: center;
 }
 
-.game-container {
-    margin: 20px auto;
-    width: 800px;
+.container {
+    margin: 0 auto;
+    width: 80%;
 }
 
 .deck {
+    margin: 20px auto;
     width: 100px;
     height: 140px;
-    background-color: #9e6a6a;
-    border: 1px solid #000;
-    margin: 0 auto;
-    cursor: pointer;
+    background-color: #fff;
+    border: 2px solid #000;
+    border-radius: 5px;
     position: relative;
-    line-height: 140px;
-    font-size: 24px;
+    cursor: pointer;
 }
 
 .tableau {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     margin-top: 20px;
-    flex-wrap: wrap;
 }
 
 .card {
     width: 100px;
     height: 140px;
-    background-color: #5c9db1;
     border: 1px solid #000;
+    border-radius: 5px;
     margin: 5px;
-    display: inline-block;
-    position: relative;
-    line-height: 140px;
-    font-size: 24px;
-    cursor: pointer;
-}
-
-.card.dragging {
-    opacity: 0.5;
+    background-size: cover;
 }

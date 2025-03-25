@@ -1,27 +1,18 @@
-const deckElement = document.getElementById('deck');
-const tableauElement = document.getElementById('tableau');
-const scoreElement = document.getElementById('score');
-const timerElement = document.getElementById('timer');
-
-const suits = ['Черви', 'Бубны', 'Трефы', 'Пики'];
-const values = ['6', '7', '8', '9', '10', 'В', 'Д', 'К', 'Т'];
+const suits = ['hearts', 'diamonds', 'clubs', 'spades'];
+const ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
 let deck = [];
 let score = 0;
-let timer = 0;
-let timerInterval;
-let draggedCard = null;
 
-// Создание колоды
 function createDeck() {
     for (let suit of suits) {
-        for (let value of values) {
-            deck.push({ suit, value });
+        for (let rank of ranks) {
+            deck.push({ suit, rank });
         }
     }
+    deck = deck.slice(0, 36); // Оставляем только 36 карт
     shuffleDeck();
 }
 
-// Перемешивание колоды
 function shuffleDeck() {
     for (let i = deck.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -29,69 +20,25 @@ function shuffleDeck() {
     }
 }
 
-// Отображение карты
 function drawCard() {
-    if (deck.length === 0) {
-        alert("Карт больше нет в колоде!");
-        return;
+    if (deck.length > 0) {
+        const card = deck.pop();
+        score++;
+        document.getElementById('score').innerText = score;
+        displayCard(card);
+    } else {
+        alert('Все карты разданы!');
     }
-    const card = deck.pop();
-    const cardElement = createCardElement(card);
-    tableauElement.appendChild(cardElement);
-    updateScore(1); // Увеличиваем счет на 1 за каждую раздачу карты
 }
 
-// Создание элемента карты
-function createCardElement(card) {
-    const cardElement = document.createElement('div');
-    cardElement.className = 'card';
-    cardElement.textContent = `${card.value} ${card.suit}`;
-    cardElement.draggable = true;
-
-    cardElement.addEventListener('dragstart', (e) => {
-        draggedCard = cardElement;
-        setTimeout(() => {
-            cardElement.classList.add('dragging');
-        }, 0);
-    });
-
-    cardElement.addEventListener('dragend', () => {
-        draggedCard = null;
-        cardElement.classList.remove('dragging');
-    });
-
-    tableauElement.addEventListener('dragover', (e) => {
-        e.preventDefault();
-    });
-
-    tableauElement.addEventListener('drop', (e) => {
-        if (draggedCard) {
-            tableauElement.appendChild(draggedCard);
-        }
-    });
-
-    return cardElement;
+function displayCard(card) {
+    const tableau = document.getElementById('tableau');
+    const cardDiv = document.createElement('div');
+    cardDiv.className = 'card';
+    cardDiv.style.backgroundImage = `url('images/${card.rank}_of_${card.suit}.png')`; // Путь к изображению карты
+    tableau.appendChild(cardDiv);
 }
 
-// Обновление счета
-function updateScore(points) {
-    score += points;
-    scoreElement.textContent = score;
-}
+document.getElementById('deck').addEventListener('click', drawCard);
 
-// Запуск таймера
-function startTimer() {
-    timerInterval = setInterval(() => {
-        timer++;
-        timerElement.textContent = timer;
-    }, 1000);
-}
-
-// Инициализация игры
-function initGame() {
-    createDeck();
-    startTimer();
-}
-
-// Запуск игры
-initGame();
+createDeck();
