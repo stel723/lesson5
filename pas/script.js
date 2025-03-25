@@ -2,6 +2,9 @@ const suits = ['hearts', 'diamonds', 'clubs', 'spades'];
 const ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
 let deck = [];
 let score = 0;
+let tableau = [];
+let foundation = [[], [], [], []]; // Фонды для каждой масти
+let selectedCard = null;
 
 function createDeck() {
     for (let suit of suits) {
@@ -32,11 +35,52 @@ function drawCard() {
 }
 
 function displayCard(card) {
-    const tableau = document.getElementById('tableau');
+    const tableauDiv = document.getElementById('tableau');
     const cardDiv = document.createElement('div');
     cardDiv.className = 'card';
     cardDiv.style.backgroundImage = `url('images/${card.rank}_of_${card.suit}.png')`; // Путь к изображению карты
-    tableau.appendChild(cardDiv);
+    cardDiv.dataset.rank = card.rank;
+    cardDiv.dataset.suit = card.suit;
+    cardDiv.addEventListener('click', selectCard);
+    tableauDiv.appendChild(cardDiv);
+    tableau.push(card);
+}
+
+function selectCard(event) {
+    const cardDiv = event.currentTarget;
+    if (selectedCard) {
+        // Если уже выбрана карта, проверяем возможность перемещения
+        if (canMoveCard(selectedCard, cardDiv)) {
+            moveCard(selectedCard, cardDiv);
+            checkVictory();
+        }
+        selectedCard.classList.remove('selected');
+        selectedCard = null;
+    } else {
+        selectedCard = cardDiv;
+        selectedCard.classList.add('selected');
+    }
+}
+
+function canMoveCard(selectedCard, targetCard) {
+    // Логика для проверки возможности перемещения карты
+    // Например, можно перемещать только на пустую ячейку или на карту меньшего ранга
+    return true; // Упрощение, здесь должна быть ваша логика
+}
+
+function moveCard(selectedCard, targetCard) {
+    // Логика перемещения карты
+    targetCard.style.backgroundImage = selectedCard.style.backgroundImage;
+    targetCard.dataset.rank = selectedCard.dataset.rank;
+    targetCard.dataset.suit = selectedCard.dataset.suit;
+    selectedCard.remove();
+}
+
+function checkVictory() {
+    // Проверка на победу
+    if (foundation.every(f => f.length === 9)) { // 9 карт в каждой масти
+        document.getElementById('message').innerText = 'Вы выиграли!';
+    }
 }
 
 document.getElementById('deck').addEventListener('click', drawCard);
