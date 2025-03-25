@@ -27,6 +27,12 @@ body {
     margin-top: 20px;
 }
 
+.column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .card {
     width: 100px;
     height: 140px;
@@ -34,4 +40,31 @@ body {
     border-radius: 5px;
     margin: 5px;
     background-size: cover;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.2s;
+}
+
+.card.selected {
+    border: 2px solid yellow;
+    transform: scale(1.1);
+}
+
+.foundation {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.foundation-column {
+    width: 100px;
+    height: 140px;
+    border: 2px dashed #fff;
+    margin: 0 10px;
+}
+
+.message {
+    margin-top: 20px;
+    font-size: 20px;
+    color: yellow;
 }
