@@ -43,7 +43,7 @@ function displayCard(card) {
 
     const cardDiv = document.createElement('div');
     cardDiv.className = 'card';
-    cardDiv.style.backgroundImage = `url('images/${card.rank}_of_${card.suit}.png')`; // Путь к изображению карты
+    cardDiv.style.backgroundImage = `url('images/${card.rank}_of_${card.suit}.jpg')`; // Путь к изображению карты
     cardDiv.dataset.rank = card.rank;
     cardDiv.dataset.suit = card.suit;
     cardDiv.addEventListener('click', () => selectCard(cardDiv, columnDiv));
