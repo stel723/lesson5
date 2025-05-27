@@ -1,8 +1,7 @@
-<!-- index.php -->
+
 <?php
 require_once 'User.php';
 
-// Создаем 5 объектов User
 $users = [
     new User("Иван Иванов", "ivan@example.com"),
     new User("Мария Петрова", "maria@example.com"),
